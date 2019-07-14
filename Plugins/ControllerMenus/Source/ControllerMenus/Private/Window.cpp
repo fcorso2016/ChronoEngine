@@ -21,6 +21,7 @@ TSharedRef<SWidget> UWindow::RebuildWidget() {
 				Slot->SetAnchors(FAnchors(0.f, 0.f, 1.f, 1.f));
 				Slot->SetPosition(FVector2D(0.f, 0.f));
 				Slot->SetSize(FVector2D(0.f, 0.f));
+				Slot->SetZOrder(-100);
 			}
 
 			ContentsMargin = WindowBack->GetFramePadding();
@@ -32,6 +33,7 @@ TSharedRef<SWidget> UWindow::RebuildWidget() {
 				Slot->SetAnchors(FAnchors(0.f, 0.f, 1.f, 1.f));
 				Slot->SetPosition(ContentsMargin.GetTopLeft());
 				Slot->SetSize(FVector2D(ContentsMargin.Right, ContentsMargin.Bottom));
+				Slot->SetZOrder(0);
 			}
 		}
 
