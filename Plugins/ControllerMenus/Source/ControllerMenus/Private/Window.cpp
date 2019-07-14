@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Created by Francesco Corso. Labeled for reuse with attribution under Creative Commons.
 
 
 #include "Window.h"
