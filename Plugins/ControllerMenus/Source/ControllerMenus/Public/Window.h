@@ -14,13 +14,20 @@ UCLASS()
 class CONTROLLERMENUS_API UWindow : public UUserWidget {
 	GENERATED_BODY()
 
-protected:
+public:
 	/**
 	 * Serves as the background behind the window. Not all windows are required to have this element.
 	 */
-	UPROPERTY(BlueprintReadOnly, Category = Components, meta = (BindWidget, OptionalWidget = true))
+	UPROPERTY(BlueprintReadOnly, Category = Components, meta = (BindWidgetOptional))
 	UWindowBack* WindowBack;
 
-	TSharedRef <SWidget> RebuildWidget() override;
+	/**
+	 * Serves as the holder of the windows contents. This element is automatically sized based on the background.
+	 */
+	UPROPERTY(BlueprintReadOnly, Category = Components, meta = (BindWidget))
+	UPanelWidget* ContentsPane;
+
+protected:
+	TSharedRef<SWidget> RebuildWidget() override;
 	
 };
