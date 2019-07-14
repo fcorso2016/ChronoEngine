@@ -9,3 +9,7 @@ UWindowBack::UWindowBack(const FObjectInitializer& ObjectInitializer) : UUserWid
 	FramePadding.Left = 12.f;
 	FramePadding.Right = 12.f;
 }
+
+const FMargin& UWindowBack::GetFramePadding() const {
+	return FramePadding;
+}
