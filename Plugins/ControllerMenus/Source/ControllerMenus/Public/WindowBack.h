@@ -13,14 +13,14 @@ UCLASS()
 class CONTROLLERMENUS_API UWindowBack : public UUserWidget {
 	GENERATED_BODY()
 
-public:
-	UWindowBack(const FObjectInitializer& ObjectInitializer);
-
 protected:
 	/**
 	 * The amount of space between the edge of the window and the start of the window's contents.
 	 */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Layout)
 	FMargin FramePadding;
+	
+public:
+	UWindowBack(const FObjectInitializer& ObjectInitializer);
 	
 };
