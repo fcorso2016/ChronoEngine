@@ -4,14 +4,14 @@
 	"VersionName": "1.0",
 	"FriendlyName": "ControllerMenus",
 	"Description": "This serves as the baseline for a menu system that is navigable with both a controller and a traditional mouse",
-	"Category": "Other",
+	"Category": "Widgets",
 	"CreatedBy": "Francesco Corso",
 	"CreatedByURL": "",
 	"DocsURL": "",
 	"MarketplaceURL": "",
 	"SupportURL": "",
 	"CanContainContent": true,
-	"IsBetaVersion": false,
+	"IsBetaVersion": true,
 	"Installed": false,
 	"Modules": [
 		{

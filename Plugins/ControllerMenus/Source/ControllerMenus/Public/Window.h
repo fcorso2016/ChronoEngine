@@ -10,7 +10,7 @@
 /**
  * Primative structural class that serves as the basis for every window in the game.
  */
-UCLASS()
+UCLASS(Blueprintable)
 class CONTROLLERMENUS_API UWindow : public UUserWidget {
 	GENERATED_BODY()
 

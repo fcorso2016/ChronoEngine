@@ -9,7 +9,7 @@
 /**
  * Basic identifier class for UI elements that serve as the background to a window.
  */
-UCLASS()
+UCLASS(Blueprintable)
 class CONTROLLERMENUS_API UWindowBack : public UUserWidget {
 	GENERATED_BODY()
 
