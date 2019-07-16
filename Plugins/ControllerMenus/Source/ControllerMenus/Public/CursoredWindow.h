@@ -5,6 +5,8 @@
 #include "CoreMinimal.h"
 #include "Window.h"
 #include "Cursor.h"
+#include "Runtime/UMG/Public/Components/UniformGridPanel.h"
+#include "SelectableOption.h"
 #include "CursoredWindow.generated.h"
 
 /**
@@ -71,10 +73,22 @@ class CONTROLLERMENUS_API UCursoredWindow : public UWindow {
 
 public:
 	/**
+	 * The section of the window where the selectable options exist
+	 */
+	UPROPERTY(BlueprintReadOnly, Category = Components, meta = (BindWidget))
+	UUniformGridPanel* SelectionArea;
+
+	/**
 	 * List of all input mappings 
 	 */
 	UPROPERTY(BlueprintReadOnly, Category = Components, meta = (BindWidget))
 	UCursor* WindowCursor;
+
+	/**
+	 * The list of elements in the window's layout
+	 */
+	UPROPERTY(BlueprintReadOnly, Category = Components)
+	TArray<USelectableOption*> Elements;
 
 private:
 	/** 
@@ -84,28 +98,48 @@ private:
 	FInputActions WindowInputMappings;
 
 	/**
+	 * The horizontal alignment of the elements in the window
+	 */
+	UPROPERTY(EditAnywhere, Category = Window)
+	TEnumAsByte<EHorizontalAlignment> HorizontalAlignment;
+
+	/**
+	 * The vertical alignment of the elements in the window 
+	 */
+	UPROPERTY(EditAnywhere, Category = Window)
+	TEnumAsByte<EVerticalAlignment> VerticalAlignment;
+
+	/**
 	 * The index of the cursor in the window
 	 */
-	UPROPERTY()
+	UPROPERTY(EditAnywhere, Category = Input, meta = (UIMin = -1, ClampMin = -1))
 	int Index;
 
 	/**
 	 * Get the window's activation status 
 	 */
-	UPROPERTY()
+	UPROPERTY(EditAnywhere, Category = Input)
 	bool bIsActive;
 
 public:
-	
-
 	/**
 	 * The delegate called when the player presses confirm/clicks on an option
 	 */
 	UPROPERTY(BlueprintAssignable, Category = Input)
 	FProcessConfirm OnConfirm;
+
+	/**
+	 * The delegate called when the player cancels out of the window
+	 */
+	UPROPERTY(BlueprintAssignable, Category = Input)
+	FProcessCancel OnCancel;
 	
 	UCursoredWindow(const FObjectInitializer& ObjectInitializer);
 
+protected:
+	TSharedRef<SWidget> RebuildWidget() override;
+
+public:
 	/**
 	 * Get the index of the cursor
 	 * @return The index of the cursor in the window
@@ -114,11 +148,17 @@ public:
 	int GetIndex() const;
 
 	/**
-	 * Set the index of the cursor
-	 * @param NewIndex The new index of the cursor
+	 * Select a certain index of the window
+	 * @param NewIndex The index to select
 	 */
 	UFUNCTION(BlueprintCallable, Category = Input)
-	void SetIndex(int NewIndex);
+	void Select(int NewIndex);
+
+	/**
+	 * Deselect the window, hiding the cursor
+	 */
+	UFUNCTION(BlueprintCallable, Category = Input)
+	void Deselect();
 
 	/**
 	* Get if the window is active
@@ -134,6 +174,30 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Window)
 	void SetActive(bool bActive);
 
+private:
+	/**
+	 * Sets the position of the cursor in the window
+	 */
+	UFUNCTION()
+	void SetCursorPosition();
+
+	/**
+	 * Creates an element and adds it to the window
+	 * @param NewIndex the index of the element to add
+	 */
+	UFUNCTION()
+	void AddElement(int NewIndex);
+
+protected:
+	/**
+	 * Actually construct the new element and add it to the window
+	 * @param NewIndex the index of element to construct
+	 * @return The constructed element
+	 */
+	UFUNCTION(BlueprintImplementableEvent, Category = Window)
+	USelectableOption* CreateNewElement(int NewIndex);
+
+public:
 	/**
 	 * Gets the count of elements in the window
 	 * @return The number of elements in the window
@@ -156,5 +220,33 @@ public:
 	 */
 	UFUNCTION(BlueprintPure, Category = Window)
 	int GetRowCount() const;
+
+	/**
+	* Can the cursor loop around the edges of the window?
+	* @return if the cursor is able to loop
+	*/
+	UFUNCTION(BlueprintNativeEvent, BlueprintPure, Category = Window)
+	bool CursorLoop();
+	bool CursorLoop_Implementation();
+
+protected:
+	/**
+	* Determines if the key that is currently pressed is mapped to the given action mapping
+	* @param Key The key being pressed
+	* @param Action The action binding
+	* @return if the input is valid
+	*/
+	UFUNCTION(BlueprintPure, Category = Input)
+	bool ValidInput(FKey Key, FName Action) const;
+
+	FReply NativeOnKeyDown(const FGeometry& MyGeometry, const FKeyEvent& InKeyEvent) override;
+
+	/**
+	* Parses cursor movement
+	* @param Key The key that is being depressed
+	* @param bHandled Was the even handled
+	*/
+	UFUNCTION()
+	void ProcessCursorInput(const FKey& Key, bool& bHandled);
 
 };
