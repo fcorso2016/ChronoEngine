@@ -4,6 +4,7 @@
 #include "SelectableOption.h"
 #include "Runtime/UMG/Public/Components/CanvasPanel.h"
 #include "Runtime/UMG/Public/Components/CanvasPanelSlot.h"
+#include "CursoredWindow.h"
 
 TSharedRef<SWidget> USelectableOption::RebuildWidget() {
 	// Get the original widget
@@ -32,9 +33,13 @@ TSharedRef<SWidget> USelectableOption::RebuildWidget() {
 }
 
 void USelectableOption::SelectElement() {
-
+	if (Owner->GetActive()) {
+		Owner->Select(this);
+	}
 }
 
 void USelectableOption::ClickElement() {
-
+	if (Owner->GetActive()) {
+		Owner->OnConfirm.Broadcast(Symbol);
+	}
 }

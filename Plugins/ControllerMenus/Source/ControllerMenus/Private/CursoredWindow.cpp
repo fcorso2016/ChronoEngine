@@ -7,6 +7,8 @@
 #include "Runtime/UMG/Public/Components/UniformGridSlot.h"
 #include "MenuPlayerController.h"
 
+#include "Runtime/Engine/Classes/Engine/Engine.h"
+
 UCursoredWindow::UCursoredWindow(const FObjectInitializer& ObjectInitializer) {	
 	WindowInputMappings.UpInput      = "MenuUp";
 	WindowInputMappings.DownInput    = "MenuDown";
@@ -20,6 +22,7 @@ UCursoredWindow::UCursoredWindow(const FObjectInitializer& ObjectInitializer) {
 
 	Index = 0;
 	bIsActive = true;
+	bIsFocusable = true;
 }
 
 TSharedRef<SWidget> UCursoredWindow::RebuildWidget() {
@@ -47,6 +50,13 @@ TSharedRef<SWidget> UCursoredWindow::RebuildWidget() {
 	return OriginalWidget;
 }
 
+void UCursoredWindow::NativeConstruct() {
+	Super::NativeConstruct();
+	if (GetActive()) {
+		SetKeyboardFocus();
+	}
+}
+
 int UCursoredWindow::GetIndex() const {
 	return Index;
 }
@@ -54,6 +64,11 @@ int UCursoredWindow::GetIndex() const {
 void UCursoredWindow::Select(int NewIndex) {
 	Index = FMath::Clamp(NewIndex, 0, GetElementCount() - 1);
 	SetCursorPosition();
+}
+
+void UCursoredWindow::Select(USelectableOption* Option) {
+	int NewIndex = Elements.IndexOfByKey(Option);
+	Select(NewIndex);
 }
 
 void UCursoredWindow::Deselect() {
@@ -74,12 +89,12 @@ void UCursoredWindow::SetActive(bool bActive) {
 
 void UCursoredWindow::SetCursorPosition() {
 	if (Index >= 0 && Index < GetElementCount() && WindowCursor != nullptr) {
-		UUniformGridSlot* Slot = Cast<UUniformGridSlot>(SelectionArea->Slot);
+		UUniformGridSlot* Slot = Cast<UUniformGridSlot>(WindowCursor->Slot);
 		if (Slot != nullptr) {
-			Slot->SetRow(Index / GetRowCount());
+			Slot->SetRow(Index / GetColumnCount());
 			Slot->SetColumn(Index % GetColumnCount());
-			Slot->SetHorizontalAlignment(HorizontalAlignment);
-			Slot->SetVerticalAlignment(VerticalAlignment);
+			Slot->SetHorizontalAlignment(EHorizontalAlignment::HAlign_Fill);
+			Slot->SetVerticalAlignment(EVerticalAlignment::VAlign_Fill);
 		}
 
 		WindowCursor->SetVisibility(ESlateVisibility::Visible);
@@ -98,7 +113,7 @@ void UCursoredWindow::AddElement(int NewIndex) {
 			SelectionArea->AddChildToUniformGrid(Element);
 			UUniformGridSlot* Slot = Cast<UUniformGridSlot>(Element->Slot);
 			if (Slot != nullptr) {
-				Slot->SetRow(NewIndex / GetRowCount());
+				Slot->SetRow(NewIndex / GetColumnCount());
 				Slot->SetColumn(NewIndex % GetColumnCount());
 				Slot->SetHorizontalAlignment(HorizontalAlignment);
 				Slot->SetVerticalAlignment(VerticalAlignment);
@@ -180,23 +195,25 @@ void UCursoredWindow::ProcessCursorInput(const FKey& Key, bool& bHandled) {
 			}
 		}
 
-		if (ValidInput(Key, WindowInputMappings.LeftInput)) {
-			if (Index > 0) {
-				Select(Index - 1);
-				bHandled = true;
-			} else if (CursorLoop()) {
-				Select(GetElementCount() - 1);
-				bHandled = true;
+		if (GetColumnCount() > 1) {
+			if (ValidInput(Key, WindowInputMappings.LeftInput)) {
+				if (Index > 0) {
+					Select(Index - 1);
+					bHandled = true;
+				} else if (CursorLoop()) {
+					Select(GetElementCount() - 1);
+					bHandled = true;
+				}
 			}
-		}
 
-		if (ValidInput(Key, WindowInputMappings.RightInput)) {
-			if (Index < GetElementCount() - 1) {
-				Select(Index + 1);
-				bHandled = true;
-			} else if (CursorLoop()) {
-				Select(0);
-				bHandled = true;
+			if (ValidInput(Key, WindowInputMappings.RightInput)) {
+				if (Index < GetElementCount() - 1) {
+					Select(Index + 1);
+					bHandled = true;
+				} else if (CursorLoop()) {
+					Select(0);
+					bHandled = true;
+				}
 			}
 		}
 	}

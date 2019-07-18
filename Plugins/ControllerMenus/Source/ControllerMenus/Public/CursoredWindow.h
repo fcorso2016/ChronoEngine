@@ -139,6 +139,8 @@ public:
 protected:
 	TSharedRef<SWidget> RebuildWidget() override;
 
+	void NativeConstruct() override;
+
 public:
 	/**
 	 * Get the index of the cursor
@@ -153,6 +155,11 @@ public:
 	 */
 	UFUNCTION(BlueprintCallable, Category = Input)
 	void Select(int NewIndex);
+
+	/**
+	 * Selects the specified element in the window
+	 */
+	void Select(USelectableOption* Option);
 
 	/**
 	 * Deselect the window, hiding the cursor
