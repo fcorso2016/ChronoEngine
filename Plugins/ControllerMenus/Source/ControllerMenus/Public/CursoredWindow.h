@@ -13,7 +13,7 @@
 * Struct that stores the input handlers for the window
 */
 USTRUCT(BlueprintType)
-struct FInputActions {
+struct FCursorActions {
 	GENERATED_BODY()
 
 public:
@@ -95,7 +95,7 @@ private:
 	 * List of all input mappings
 	 */
 	UPROPERTY(EditAnywhere, Category = Input)
-	FInputActions WindowInputMappings;
+	FCursorActions WindowInputMappings;
 
 	/**
 	 * The horizontal alignment of the elements in the window
@@ -237,14 +237,7 @@ public:
 	bool CursorLoop_Implementation();
 
 protected:
-	/**
-	* Determines if the key that is currently pressed is mapped to the given action mapping
-	* @param Key The key being pressed
-	* @param Action The action binding
-	* @return if the input is valid
-	*/
-	UFUNCTION(BlueprintPure, Category = Input)
-	bool ValidInput(FKey Key, FName Action) const;
+    bool ValidInput(FKey Key, FName Action) const override;
 
 	FReply NativeOnKeyDown(const FGeometry& MyGeometry, const FKeyEvent& InKeyEvent) override;
 

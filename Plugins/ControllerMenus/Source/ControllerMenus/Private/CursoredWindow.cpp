@@ -5,9 +5,6 @@
 #include "Runtime/UMG/Public/Components/CanvasPanel.h"
 #include "Runtime/UMG/Public/Components/CanvasPanelSlot.h"
 #include "Runtime/UMG/Public/Components/UniformGridSlot.h"
-#include "MenuPlayerController.h"
-
-#include "Runtime/Engine/Classes/Engine/Engine.h"
 
 UCursoredWindow::UCursoredWindow(const FObjectInitializer& ObjectInitializer) {	
 	WindowInputMappings.UpInput      = "MenuUp";
@@ -29,10 +26,7 @@ TSharedRef<SWidget> UCursoredWindow::RebuildWidget() {
 	// Get the original widget
 	TSharedRef<SWidget> OriginalWidget = Super::RebuildWidget();
 
-	// Retrieve the Root Component of the widget
-	UCanvasPanel* RootWidget = Cast<UCanvasPanel>(GetRootWidget());
-
-	if (RootWidget != nullptr && ContentsPane != nullptr && SelectionArea != nullptr) {
+	if (ContentsPane != nullptr && SelectionArea != nullptr) {
 		UCanvasPanelSlot* Slot = Cast<UCanvasPanelSlot>(SelectionArea->Slot);
 		if (Slot != nullptr) {
 			Slot->SetAnchors(FAnchors(0.f, 0.f, 1.f, 1.f));
@@ -139,20 +133,7 @@ bool UCursoredWindow::CursorLoop_Implementation() {
 }
 
 bool UCursoredWindow::ValidInput(FKey Key, FName Action) const {
-	if (GetActive() && GetOwningPlayer() != nullptr) {
-		AMenuPlayerController* Controller = Cast<AMenuPlayerController>(GetOwningPlayer());
-		if (Controller != nullptr) {
-			TArray<FInputActionKeyMapping> ActionBindings;
-			Controller->GetActionKeyBinding(Action, ActionBindings);
-			for (FInputActionKeyMapping Mapping : ActionBindings) {
-				if (Mapping.Key == Key) {
-					return true;
-				}
-			}
-		}
-	}
-
-	return false;
+    return GetActive() && Super::ValidInput(Key, Action);
 }
 
 FReply UCursoredWindow::NativeOnKeyDown(const FGeometry& MyGeometry, const FKeyEvent& InKeyEvent) {
@@ -163,8 +144,10 @@ FReply UCursoredWindow::NativeOnKeyDown(const FGeometry& MyGeometry, const FKeyE
 	ProcessCursorInput(Key, bHandled);
 	if (ValidInput(Key, WindowInputMappings.ConfirmInput)) {
 		OnConfirm.Broadcast(Elements[Index]->Symbol);
+        bHandled = true;
 	} else if (ValidInput(Key, WindowInputMappings.CancelInput)) {
 		OnCancel.Broadcast();
+        bHandled = true;
 	}
 
 	if (bHandled) {

@@ -4,6 +4,7 @@
 #include "Window.h"
 #include "Runtime/UMG/Public/Components/CanvasPanel.h"
 #include "Runtime/UMG/Public/Components/CanvasPanelSlot.h"
+#include "MenuPlayerController.h"
 
 TSharedRef<SWidget> UWindow::RebuildWidget() {
 	// Get the original widget
@@ -40,4 +41,21 @@ TSharedRef<SWidget> UWindow::RebuildWidget() {
 	}
 
 	return OriginalWidget;
+}
+
+bool UWindow::ValidInput(FKey Key, FName Action) const {
+    if (GetOwningPlayer() != nullptr) {
+        AMenuPlayerController* Controller = Cast<AMenuPlayerController>(GetOwningPlayer());
+        if (Controller != nullptr) {
+            TArray<FInputActionKeyMapping> ActionBindings;
+            Controller->GetActionKeyBinding(Action, ActionBindings);
+            for (FInputActionKeyMapping Mapping : ActionBindings) {
+                if (Mapping.Key == Key) {
+                    return true;
+                }
+            }
+        }
+    }
+
+    return false;
 }

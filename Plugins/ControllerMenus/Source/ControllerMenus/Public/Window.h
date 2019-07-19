@@ -29,5 +29,14 @@ public:
 
 protected:
 	TSharedRef<SWidget> RebuildWidget() override;
+
+    /**
+    * Determines if the key that is currently pressed is mapped to the given action mapping
+    * @param Key The key being pressed
+    * @param Action The action binding
+    * @return if the input is valid
+    */
+    UFUNCTION(BlueprintPure, Category = Input)
+    virtual bool ValidInput(FKey Key, FName Action) const;
 	
 };
