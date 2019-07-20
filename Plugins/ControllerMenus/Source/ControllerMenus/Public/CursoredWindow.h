@@ -5,8 +5,9 @@
 #include "CoreMinimal.h"
 #include "Window.h"
 #include "Cursor.h"
-#include "Runtime/UMG/Public/Components/UniformGridPanel.h"
+#include "Runtime/UMG/Public/Components/ScrollBox.h"
 #include "SelectableOption.h"
+#include "HelpWindow.h"
 #include "CursoredWindow.generated.h"
 
 /**
@@ -52,6 +53,18 @@ public:
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
 	FName CancelInput;
+
+    /**
+     * Scroll the scrolling domain up
+     */
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
+    FName ScrollUp;
+
+    /**
+     * Scroll the scrolling domain up
+     */
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
+    FName ScrollDown;
 };
 
 /**
@@ -76,7 +89,13 @@ public:
 	 * The section of the window where the selectable options exist
 	 */
 	UPROPERTY(BlueprintReadOnly, Category = Components, meta = (BindWidget))
-	UUniformGridPanel* SelectionArea;
+	UPanelWidget* SelectionArea;
+
+    /**
+     * The section of the window where the selectable options exist
+     */
+    UPROPERTY(BlueprintReadOnly, Category = Components, meta = (BindWidgetOptional))
+    UScrollBox* ScrollZone;
 
 	/**
 	 * List of all input mappings 
@@ -133,6 +152,12 @@ public:
 	 */
 	UPROPERTY(BlueprintAssignable, Category = Input)
 	FProcessCancel OnCancel;
+
+	/**
+	 * The help window for the game to display content based upon what the game needs it to contain
+	 */
+	UPROPERTY(BlueprintReadOnly, Category = Help)
+	UHelpWindow* HelpWindow;
 	
 	UCursoredWindow(const FObjectInitializer& ObjectInitializer);
 
@@ -180,6 +205,20 @@ public:
 	*/
 	UFUNCTION(BlueprintCallable, Category = Window)
 	void SetActive(bool bActive);
+
+	/**
+	 * Sets the help window associated with this widget
+	 * @param NewHelpWindow the new help window the be assigned
+	 */
+	UFUNCTION(BlueprintCallable, Category = Help)
+	void SetHelpWindow(UHelpWindow* NewHelpWindow);
+
+protected:
+	/**
+	 * Update the help window with information based on what the subwindow needs
+	 */
+	UFUNCTION(BlueprintImplementableEvent, Category = Help)
+	void UpdateHelp();
 
 private:
 	/**
@@ -243,10 +282,18 @@ protected:
 
 	/**
 	* Parses cursor movement
-	* @param Key The key that is being depressed
-	* @param bHandled Was the even handled
+	* @param Key The key that is being pressed
+	* @param bHandled Was the event handled?
 	*/
 	UFUNCTION()
 	void ProcessCursorInput(const FKey& Key, bool& bHandled);
+
+	/**
+	 * Process scroll input for the help window
+	 * @param Key The that is being pressed
+	 * @param bHandled Was the event handled?
+	 */
+	UFUNCTION()
+	void ProcessScrollInput(const FKey& Key, bool& bHandled);
 
 };

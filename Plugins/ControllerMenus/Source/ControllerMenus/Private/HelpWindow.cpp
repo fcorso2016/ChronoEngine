@@ -5,13 +5,6 @@
 #include "MenuPlayerController.h"
 #include "Runtime/UMG/Public/Components/CanvasPanelSlot.h"
 
-UHelpWindow::UHelpWindow(const FObjectInitializer& ObjectInitializer) : UWindow(ObjectInitializer) {
-    WindowInputMappings.ScrollUp   = "MenuScrollUp";
-    WindowInputMappings.ScrollDown = "MenuScrollDown";
-
-    bIsFocusable = true;
-}
-
 TSharedRef<SWidget> UHelpWindow::RebuildWidget() {
     // Get the original widget
     TSharedRef<SWidget> OriginalWidget = Super::RebuildWidget();
@@ -29,24 +22,9 @@ TSharedRef<SWidget> UHelpWindow::RebuildWidget() {
     return OriginalWidget;
 }
 
-FReply UHelpWindow::NativeOnKeyDown(const FGeometry &MyGeometry, const FKeyEvent &InKeyEvent) {
+void UHelpWindow::ScrollWindow(float Scroll) {
     static const float SCROLL_SPEED = 30.f;
-    FReply OldHandling = UUserWidget::NativeOnKeyDown(MyGeometry, InKeyEvent);
-
-    bool bHandled = false;
-    if (ScrollableSection != nullptr) {
-        FKey Key = InKeyEvent.GetKey();
-        if (ValidInput(Key, WindowInputMappings.ScrollUp)) {
-            ScrollableSection->SetScrollOffset(ScrollableSection->GetScrollOffset() - SCROLL_SPEED);
-            bHandled = true;
-        } else if (ValidInput(Key, WindowInputMappings.ScrollDown)) {
-            ScrollableSection->SetScrollOffset(ScrollableSection->GetScrollOffset() + SCROLL_SPEED);
-            bHandled = true;
-        }
-    }
-
-    if (bHandled) {
-        return FReply::Handled();
-    }
-    return OldHandling;
+	if (ScrollableSection != nullptr) {
+		ScrollableSection->SetScrollOffset(ScrollableSection->GetScrollOffset() + Scroll * SCROLL_SPEED);
+	}
 }

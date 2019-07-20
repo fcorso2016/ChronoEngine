@@ -10,10 +10,7 @@ TSharedRef<SWidget> USelectableOption::RebuildWidget() {
 	// Get the original widget
 	TSharedRef<SWidget> OriginalWidget = Super::RebuildWidget();
 
-	// Retrieve the Root Component of the widget
-	UCanvasPanel* RootWidget = Cast<UCanvasPanel>(GetRootWidget());
-
-	if (RootWidget != nullptr && Interactable != nullptr) {
+	if (Interactable != nullptr) {
 		UCanvasPanelSlot* Slot = Cast<UCanvasPanelSlot>(Interactable->Slot);
 		if (Slot != nullptr) {
 			Slot->SetAnchors(FAnchors(0.f, 0.f, 1.f, 1.f));
