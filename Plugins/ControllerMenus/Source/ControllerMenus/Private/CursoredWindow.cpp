@@ -41,6 +41,8 @@ TSharedRef<SWidget> UCursoredWindow::RebuildWidget() {
                 Slot->SetSize(FVector2D(FMath::Max(0.f, Slot->GetSize().X), FMath::Max(0.f, Slot->GetSize().Y)));
                 Slot->SetZOrder(0);
             }
+
+			ScrollZone->AllowOverscroll = false;
         } else {
             UCanvasPanelSlot* Slot = Cast<UCanvasPanelSlot>(SelectionArea->Slot);
             if (Slot != nullptr) {
@@ -74,6 +76,9 @@ int UCursoredWindow::GetIndex() const {
 void UCursoredWindow::Select(int NewIndex) {
 	Index = FMath::Clamp(NewIndex, 0, GetElementCount() - 1);
 	SetCursorPosition();
+	if (ScrollZone != nullptr) {
+		ScrollZone->ScrollWidgetIntoView(WindowCursor);
+	}
 	UpdateHelp();
 }
 
@@ -187,6 +192,7 @@ FReply UCursoredWindow::NativeOnKeyDown(const FGeometry& MyGeometry, const FKeyE
 	bool bHandled = false;
 	FKey Key = InKeyEvent.GetKey();
 	ProcessCursorInput(Key, bHandled);
+	ProcessScrollInput(Key, bHandled);
 	if (ValidInput(Key, WindowInputMappings.ConfirmInput)) {
 		OnConfirm.Broadcast(Elements[Index]->Symbol);
         bHandled = true;

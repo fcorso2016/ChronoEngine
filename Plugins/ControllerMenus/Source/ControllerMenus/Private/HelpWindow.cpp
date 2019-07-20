@@ -17,6 +17,8 @@ TSharedRef<SWidget> UHelpWindow::RebuildWidget() {
             Slot->SetSize(FVector2D(FMath::Max(0.f, Slot->GetSize().X), FMath::Max(0.f, Slot->GetSize().Y)));
             Slot->SetZOrder(0);
         }
+
+		ScrollableSection->AllowOverscroll = false;
     }
 
     return OriginalWidget;

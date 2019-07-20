@@ -4,5 +4,5 @@
 #include "WindowBack.h"
 
 const FMargin UWindowBack::GetFramePadding_Implementation() const {
-	return FMargin(35.f);
+	return FMargin(5.f);
 }
