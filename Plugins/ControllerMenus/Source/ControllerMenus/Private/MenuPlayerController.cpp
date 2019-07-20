@@ -7,6 +7,7 @@ void AMenuPlayerController::AddMenu(TSubclassOf<UMenu> MenuClass) {
 	UMenu* NewMenu = CreateWidget<UMenu>(this, MenuClass);
 	NewMenu->AddToViewport(9999); // Z-order, this just makes it render on the very top.
 	MenuStack.Add(NewMenu);
+	Pause();
 	SetInputMode(FInputModeUIOnly());
 }
 
@@ -16,6 +17,7 @@ void AMenuPlayerController::PopMenu() {
 	MenuStack.Pop();
 	if (MenuStack.Num() == 0) {
 		SetInputMode(FInputModeGameOnly());
+		SetPause(false);
 	}
 }
 
