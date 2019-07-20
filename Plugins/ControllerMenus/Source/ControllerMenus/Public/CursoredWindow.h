@@ -7,7 +7,7 @@
 #include "Cursor.h"
 #include "Runtime/UMG/Public/Components/ScrollBox.h"
 #include "SelectableOption.h"
-#include "HelpWindow.h"
+#include "ScrollWindow.h"
 #include "CursoredWindow.generated.h"
 
 /**
@@ -157,7 +157,7 @@ public:
 	 * The help window for the game to display content based upon what the game needs it to contain
 	 */
 	UPROPERTY(BlueprintReadOnly, Category = Help)
-	UHelpWindow* HelpWindow;
+	UScrollWindow* HelpWindow;
 	
 	UCursoredWindow(const FObjectInitializer& ObjectInitializer);
 
@@ -211,7 +211,7 @@ public:
 	 * @param NewHelpWindow the new help window the be assigned
 	 */
 	UFUNCTION(BlueprintCallable, Category = Help)
-	void SetHelpWindow(UHelpWindow* NewHelpWindow);
+	void SetHelpWindow(UScrollWindow* NewHelpWindow);
 
 protected:
 	/**

@@ -1,11 +1,11 @@
 // Created by Francesco Corso. Labeled for reuse with attribution under Creative Commons.
 
 
-#include "HelpWindow.h"
+#include "ScrollWindow.h"
 #include "MenuPlayerController.h"
 #include "Runtime/UMG/Public/Components/CanvasPanelSlot.h"
 
-TSharedRef<SWidget> UHelpWindow::RebuildWidget() {
+TSharedRef<SWidget> UScrollWindow::RebuildWidget() {
     // Get the original widget
     TSharedRef<SWidget> OriginalWidget = Super::RebuildWidget();
 
@@ -24,7 +24,7 @@ TSharedRef<SWidget> UHelpWindow::RebuildWidget() {
     return OriginalWidget;
 }
 
-void UHelpWindow::ScrollWindow(float Scroll) {
+void UScrollWindow::ScrollWindow(float Scroll) {
     static const float SCROLL_SPEED = 30.f;
 	if (ScrollableSection != nullptr) {
 		ScrollableSection->SetScrollOffset(ScrollableSection->GetScrollOffset() + Scroll * SCROLL_SPEED);

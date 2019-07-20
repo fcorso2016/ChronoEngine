@@ -103,7 +103,7 @@ void UCursoredWindow::SetActive(bool bActive) {
 	}
 }
 
-void UCursoredWindow::SetHelpWindow(UHelpWindow* NewHelpWindow) {
+void UCursoredWindow::SetHelpWindow(UScrollWindow* NewHelpWindow) {
 	HelpWindow = NewHelpWindow;
 	UpdateHelp();
 }

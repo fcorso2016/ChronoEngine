@@ -5,13 +5,13 @@
 #include "CoreMinimal.h"
 #include "Window.h"
 #include "Runtime/UMG/Public/Components/ScrollBox.h"
-#include "HelpWindow.generated.h"
+#include "ScrollWindow.generated.h"
 
 /**
  * A window that contains help information for the player to view
  */
 UCLASS(Blueprintable)
-class CONTROLLERMENUS_API UHelpWindow : public UWindow {
+class CONTROLLERMENUS_API UScrollWindow : public UWindow {
 	GENERATED_BODY()
 
 public:
