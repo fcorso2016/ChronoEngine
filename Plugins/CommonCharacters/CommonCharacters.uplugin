@@ -1,0 +1,23 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "CommonCharacters",
+	"Description": "Provides sever options for controllable pawns that are not provided by the default templates",
+	"Category": "Gameplay",
+	"CreatedBy": "Francesco Corso",
+	"CreatedByURL": "",
+	"DocsURL": "",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"CanContainContent": true,
+	"IsBetaVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "CommonCharacters",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	]
+}
