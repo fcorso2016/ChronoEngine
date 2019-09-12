@@ -3,6 +3,7 @@
 
 #include "RPGObject.h"
 
-URPGObject::URPGObject() {
+void URPGObject::PostInitProperties() {
+	Super::PostInitProperties();
 	Initialize();
 }

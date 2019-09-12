@@ -14,7 +14,7 @@ class RPGBASICS_API URPGObject : public UObject {
 	GENERATED_BODY()
 	
 public:
-	URPGObject();
+	void PostInitProperties() override;
 
 	/**
 	 * Initialize the object from the constructor
