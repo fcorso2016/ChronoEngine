@@ -28,7 +28,7 @@ public:
 	/**
 	 * Prompt for a selection and what for a response
 	 * @param OnInputComplete The event triggered when the response is made
-	 * @param Object An object that is passed through for usage by the reciever
+	 * @param Object An object that is passed through for usage by the receiver
 	 */
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = Input)
 	void SelectAction(const FOnInputComplete& OnInputComplete, UObject* Object);
