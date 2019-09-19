@@ -2,23 +2,23 @@
 
 using UnrealBuildTool;
 
-public class CommonCharacters : ModuleRules
+public class RPGBasics : ModuleRules
 {
-	public CommonCharacters(ReadOnlyTargetRules Target) : base(Target)
+	public RPGBasics(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
 		
 		PublicIncludePaths.AddRange(
 			new string[] {
-				// ... add public include paths required here ...
-			}
+                "RPGBasics/Public"
+            }
 			);
 				
 		
 		PrivateIncludePaths.AddRange(
 			new string[] {
-				// ... add other private include paths required here ...
-			}
+                "RPGBasics/Private"
+            }
 			);
 			
 		

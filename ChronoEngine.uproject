@@ -4,16 +4,30 @@
 	"Category": "",
 	"Description": "",
 	"Modules": [
-		{
-			"Name": "ChronoEngine",
-			"Type": "Runtime",
-			"LoadingPhase": "Default",
-			"AdditionalDependencies": [
-				"UMG",
-				"Engine",
-				"ControllerMenus"
-			]
-		}
+    {
+      "Name": "ChronoEngine",
+      "Type": "Runtime",
+      "LoadingPhase": "Default",
+      "AdditionalDependencies": [
+        "UMG",
+        "Engine"
+      ]
+    },
+    {
+      "Name": "ControllerMenus",
+      "Type": "Runtime",
+      "LoadingPhase": "Default"
+    },
+    {
+      "Name": "CommonCharacters",
+      "Type": "Runtime",
+      "LoadingPhase": "Default"
+    },
+    {
+      "Name": "RPGBasics",
+      "Type": "Runtime",
+      "LoadingPhase": "Default"
+    }
 	],
 	"Plugins": [
 		{

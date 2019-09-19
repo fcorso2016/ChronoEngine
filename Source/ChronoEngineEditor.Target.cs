@@ -9,6 +9,6 @@ public class ChronoEngineEditorTarget : TargetRules
 	{
 		Type = TargetType.Editor;
 
-		ExtraModuleNames.AddRange( new string[] { "ChronoEngine" } );
+		ExtraModuleNames.AddRange( new string[] { "ChronoEngine", "ControllerMenus", "CommonCharacters", "RPGBasics" } );
 	}
 }
