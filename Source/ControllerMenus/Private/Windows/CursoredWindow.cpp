@@ -85,8 +85,6 @@ void UCursoredWindow::Select(int NewIndex) {
 
 void UCursoredWindow::Select(USelectableOption* Option) {
 	int NewIndex = Elements.IndexOfByKey(Option);
-	if (GEngine)
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, FString::FromInt(NewIndex));
 	Select(NewIndex);
 }
 

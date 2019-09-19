@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Window.h"
-#include "Cursor.h"
+#include "Primatives/Cursor.h"
 #include "Runtime/UMG/Public/Components/ScrollBox.h"
 #include "SelectableOption.h"
 #include "ScrollWindow.h"

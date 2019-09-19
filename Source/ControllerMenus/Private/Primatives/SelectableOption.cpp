@@ -4,7 +4,7 @@
 #include "SelectableOption.h"
 #include "Runtime/UMG/Public/Components/CanvasPanel.h"
 #include "Runtime/UMG/Public/Components/CanvasPanelSlot.h"
-#include "CursoredWindow.h"
+#include "Windows/CursoredWindow.h"
 
 TSharedRef<SWidget> USelectableOption::RebuildWidget() {
 	// Get the original widget
