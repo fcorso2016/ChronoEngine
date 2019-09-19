@@ -9,6 +9,7 @@
 #include "Runtime/UMG/Public/Components/GridSlot.h"
 #include "Runtime/UMG/Public/Components/ScrollBoxSlot.h"
 #include "Runtime/UMG/Public/Components/GridPanel.h"
+#include "Engine/Engine.h"
 
 UCursoredWindow::UCursoredWindow(const FObjectInitializer& ObjectInitializer) {	
 	WindowInputMappings.UpInput      = "MenuUp";
@@ -84,6 +85,8 @@ void UCursoredWindow::Select(int NewIndex) {
 
 void UCursoredWindow::Select(USelectableOption* Option) {
 	int NewIndex = Elements.IndexOfByKey(Option);
+	if (GEngine)
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, FString::FromInt(NewIndex));
 	Select(NewIndex);
 }
 
