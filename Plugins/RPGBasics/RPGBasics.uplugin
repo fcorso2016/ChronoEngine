@@ -3,7 +3,7 @@
 	"Version": 1,
 	"VersionName": "1.0",
 	"FriendlyName": "RPGBasics",
-	"Description": "Contains the basic information and functionality needed for an RPG System",
+	"Description": "Contains a basic set of interfaces and classes used for basic RPG functionality",
 	"Category": "Other",
 	"CreatedBy": "Francesco Corso",
 	"CreatedByURL": "",
@@ -11,6 +11,13 @@
 	"MarketplaceURL": "",
 	"SupportURL": "",
 	"CanContainContent": true,
-	"IsBetaVersion": false,
-	"Installed": false
+	"IsBetaVersion": true,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "RPGBasics",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	]
 }
