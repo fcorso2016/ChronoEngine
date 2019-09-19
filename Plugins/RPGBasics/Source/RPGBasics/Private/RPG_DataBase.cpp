@@ -2,8 +2,3 @@
 
 
 #include "RPG_DataBase.h"
-
-void URPG_DataBase::PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent) {
-	Super::PostEditChangeProperty(PropertyChangedEvent);
-	ValidatePropertyInformation();
-}
