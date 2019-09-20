@@ -54,6 +54,7 @@ TSharedRef<SWidget> UCursoredWindow::RebuildWidget() {
             }
         }
 
+		Elements.Empty();
         for (int i = 0; i < GetElementCount(); i++) {
             AddElement(i);
         }
