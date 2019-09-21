@@ -196,7 +196,7 @@ FReply UCursoredWindow::NativeOnKeyDown(const FGeometry& MyGeometry, const FKeyE
 	ProcessCursorInput(Key, bHandled);
 	ProcessScrollInput(Key, bHandled);
 	if (ValidInput(Key, WindowInputMappings.ConfirmInput)) {
-		OnConfirm.Broadcast(Elements[Index]->Symbol);
+		OnConfirm.Broadcast(Index, Elements[Index]->Symbol);
         bHandled = true;
 	} else if (ValidInput(Key, WindowInputMappings.CancelInput)) {
 		OnCancel.Broadcast();

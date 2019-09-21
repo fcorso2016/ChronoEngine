@@ -43,6 +43,10 @@ TSharedRef<SWidget> UWindow::RebuildWidget() {
 	return OriginalWidget;
 }
 
+void UWindow::Refresh_Implementation() {
+	RebuildWidget();
+}
+
 bool UWindow::ValidInput(FKey Key, FName Action) const {
     if (GetOwningPlayer() != nullptr) {
         AMenuPlayerController* Controller = Cast<AMenuPlayerController>(GetOwningPlayer());

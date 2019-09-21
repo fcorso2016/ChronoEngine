@@ -70,7 +70,7 @@ public:
 /**
  * Delegate for when the user presses confirm 
  */
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FProcessConfirm, FName, SelectionSymbol);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FProcessConfirm, int, Index, FName, SelectionSymbol);
 
 /**
  * Delegate for when the user presses cancel

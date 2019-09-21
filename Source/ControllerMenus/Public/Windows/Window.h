@@ -30,6 +30,13 @@ public:
 protected:
 	TSharedRef<SWidget> RebuildWidget() override;
 
+	/**
+	 * Called to refresh the window's contents following a major update that requires rebuilding
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = Rendering)
+	void Refresh();
+	virtual void Refresh_Implementation();
+
     /**
     * Determines if the key that is currently pressed is mapped to the given action mapping
     * @param Key The key being pressed
