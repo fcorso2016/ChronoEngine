@@ -56,8 +56,7 @@ TSharedRef<SWidget> UCursoredWindow::RebuildWidget() {
 
 		for (USelectableOption* Option : Elements) {
 			if (Option == nullptr) continue;
-			if (Option->GetParent() == nullptr) continue;
-			Option->GetParent()->RemoveChild(Option);
+			Option->RemoveFromParent();
 		}
 		Elements.Empty();
         for (int i = 0; i < GetElementCount(); i++) {
