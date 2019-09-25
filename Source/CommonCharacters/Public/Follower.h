@@ -4,32 +4,32 @@
 
 #include "CoreMinimal.h"
 #include "Followable.h"
-#include "PlayerCharacter.generated.h"
+#include "Follower.generated.h"
 
 // This class does not need to be modified.
 UINTERFACE(MinimalAPI)
-class UPlayerCharacter : public UFollowable {
+class UFollower : public UFollowable {
 	GENERATED_BODY()
 };
 
 /**
- * Represents a player character in the game
+ * 
  */
-class COMMONCHARACTERS_API IPlayerCharacter : public IFollowable {
+class COMMONCHARACTERS_API IFollower : public IFollowable {
 	GENERATED_BODY()
 
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
 	/**
-	 * Get the set of events directly in front of the character
-	 */
-	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Event Scripts")
-	void CheckForFrontEvents();
-
-	/**
-	 * Spawns any necessary follower characters behind the player in a chain
+	 * Start following a given character
 	 */
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Followers")
-	void SpawnFollowers();
+	void StartFollowing(IFollowable* Character);
 
+	/**
+	 * Stop following a given character
+	 */
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Followers")
+	void StopFollowing(IFollowable* Character);
+	
 };
