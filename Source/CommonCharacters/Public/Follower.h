@@ -7,7 +7,7 @@
 #include "Follower.generated.h"
 
 // This class does not need to be modified.
-UINTERFACE(MinimalAPI)
+UINTERFACE(MinimalAPI, BlueprintType)
 class UFollower : public UFollowable {
 	GENERATED_BODY()
 };
@@ -24,12 +24,12 @@ public:
 	 * Start following a given character
 	 */
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Followers")
-	void StartFollowing(IFollowable* Character);
+	void StartFollowing(const TScriptInterface<IFollowable>& Character);
 
 	/**
 	 * Stop following a given character
 	 */
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Followers")
-	void StopFollowing(IFollowable* Character);
+	void StopFollowing(const TScriptInterface<IFollowable>& Character);
 	
 };

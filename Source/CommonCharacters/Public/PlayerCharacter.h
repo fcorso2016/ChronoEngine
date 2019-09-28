@@ -7,7 +7,7 @@
 #include "PlayerCharacter.generated.h"
 
 // This class does not need to be modified.
-UINTERFACE(MinimalAPI)
+UINTERFACE(MinimalAPI, BlueprintType)
 class UPlayerCharacter : public UFollowable {
 	GENERATED_BODY()
 };
