@@ -6,6 +6,14 @@
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "ChronoCodeUtilities.generated.h"
 
+UENUM(BlueprintType)
+enum class EControlMode : uint8 {
+	None			UMETA(DisplayName = "None"),
+	GameAndUI		UMETA(DisplayName = "Game and UI"),
+	UIOnly			UMETA(DisplayName = "UI Only"),
+	GameOnly		UMETA(DisplayName = "Game Only")
+};
+
 /**
  * A basic class used to hold basic game functions that cannot be implemented in Blueprints
  */
@@ -19,6 +27,17 @@ public:
 	 */
 	UFUNCTION(BlueprintPure, Category = "Utilities|Text")
 	static FText GetSuffixFromIndex(int Index);
+
+	/**
+	 * Get the current view mode of the controller
+	 * 
+	 * Written by user G_t_Pianoman on the Unreal Engine Forums
+	 * Link: https://forums.unrealengine.com/unreal-engine/feedback-for-epic/54702-get-input-mode-node
+	 * @return if the type on input the game accepts
+	 * @param PlayerController the player controller in questions
+	 */
+	UFUNCTION(BlueprintPure, Category = "Runtime Inspector")
+	static EControlMode GetCurrentViewMode(const APlayerController* PlayerController);
 	
 };
 

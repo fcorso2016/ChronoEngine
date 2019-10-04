@@ -2,6 +2,9 @@
 
 
 #include "ChronoCodeUtilities.h"
+#include "GameFramework/PlayerController.h"
+#include "Engine/World.h"
+#include "Engine/GameViewportClient.h"
 
 FText UChronoCodeUtilities::GetSuffixFromIndex(int Index) {
 	FString Suffix;
@@ -15,4 +18,24 @@ FText UChronoCodeUtilities::GetSuffixFromIndex(int Index) {
 	}
 
 	return FText::FromString(Suffix);
+}
+
+EControlMode UChronoCodeUtilities::GetCurrentViewMode(const APlayerController* PlayerController) {
+	if (IsValid(PlayerController)) {
+		UGameViewportClient* GameViewportClient = PlayerController->GetWorld()->GetGameViewport();
+		ULocalPlayer* LocalPlayer = PlayerController->GetLocalPlayer();
+
+		bool ignore = GameViewportClient->IgnoreInput();
+		EMouseCaptureMode capt = GameViewportClient->CaptureMouseOnClick();
+
+		if (ignore == false && capt == EMouseCaptureMode::CaptureDuringMouseDown) {
+			return EControlMode::GameAndUI;  // Game And UI
+		} else if (ignore == true && capt == EMouseCaptureMode::NoCapture) {
+			return EControlMode::UIOnly;  // UI Only
+		} else {
+			return EControlMode::GameOnly;  // Game Only
+		}
+	}
+
+	return EControlMode::None;
 }
