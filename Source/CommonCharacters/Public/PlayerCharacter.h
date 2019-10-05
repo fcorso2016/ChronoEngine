@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Followable.h"
+#include "Camera/CameraComponent.h"
 #include "PlayerCharacter.generated.h"
 
 // This class does not need to be modified.
@@ -31,5 +32,20 @@ public:
 	 */
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Followers")
 	void SpawnFollowers();
+
+	/**
+	 * Have the AI temporarily take control of the character for the purpose of events
+	 * @return if the AI successfully takes control of the pawn
+	 */
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Movement")
+	bool AI_PossessPawn();
+
+	/**
+	 * Have the player regain control of the pawn after the AI used it
+	 * @return if the selected player successfully regains control
+	 * @param PlayerIndex the index of the player that is regaining control
+	 */
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Movement")
+	bool RegainControl(int PlayerIndex = 0);
 
 };

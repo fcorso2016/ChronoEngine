@@ -47,6 +47,25 @@ public:
 	void StopFollowing();
 
 	/**
+	 * Pause following for a little bit
+	 */
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Followers")
+	void PauseFollowing();
+
+	/**
+	 * Resume following the target
+	 */
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Followers")
+	void ResumeFollowing();
+
+	/**
+	 * Validate if this character is allowed to follow the player or not
+	 * @return if the the AI is allowed to have the character follow
+	 */
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Followers")
+	bool CheckIfCanFollow();
+
+	/**
 	 * Get the character tht is being followed
 	 * @return the pawn that is being followed
 	 */
