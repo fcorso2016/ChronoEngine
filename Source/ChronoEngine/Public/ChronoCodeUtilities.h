@@ -24,6 +24,8 @@ class UChronoCodeUtilities : public UBlueprintFunctionLibrary {
 public:
 	/**
 	 * Retrieve an enemy name suffix based on the number of possible enemies
+	 * @return the textual suffix
+	 * @param Index the index of the enemy
 	 */
 	UFUNCTION(BlueprintPure, Category = "Utilities|Text")
 	static FText GetSuffixFromIndex(int Index);
@@ -38,6 +40,13 @@ public:
 	 */
 	UFUNCTION(BlueprintPure, Category = "Runtime Inspector")
 	static EControlMode GetCurrentViewMode(const APlayerController* PlayerController);
+
+	/**
+	 * Get the value of an invalid index
+	 * @return the value of INDEX_NONE
+	 */
+	UFUNCTION(BlueprintPure, Category = "Utilities|Arrays")
+	static int GetNullIndex();
 	
 };
 

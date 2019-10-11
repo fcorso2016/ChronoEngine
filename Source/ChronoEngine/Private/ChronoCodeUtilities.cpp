@@ -39,3 +39,7 @@ EControlMode UChronoCodeUtilities::GetCurrentViewMode(const APlayerController* P
 
 	return EControlMode::None;
 }
+
+int UChronoCodeUtilities::GetNullIndex() {
+	return INDEX_NONE;
+}
