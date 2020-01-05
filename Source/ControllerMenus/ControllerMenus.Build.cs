@@ -26,6 +26,8 @@ public class ControllerMenus : ModuleRules
 			new string[]
 			{
 				"Core",
+                "UMG",
+                "InputCore"
 				// ... add other public dependencies that you statically link with here ...
 			}
 			);
@@ -38,8 +40,6 @@ public class ControllerMenus : ModuleRules
 				"Engine",
 				"Slate",
 				"SlateCore",
-                "UMG",
-                "InputCore"
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);

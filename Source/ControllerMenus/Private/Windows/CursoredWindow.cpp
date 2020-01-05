@@ -135,7 +135,7 @@ void UCursoredWindow::SetCursorPosition() {
 	    }
 
 
-		WindowCursor->SetVisibility(ESlateVisibility::Visible);
+		WindowCursor->SetVisibility(ESlateVisibility::HitTestInvisible);
 	} else if (WindowCursor != nullptr) {
 		WindowCursor->SetVisibility(ESlateVisibility::Collapsed);
 	}
