@@ -12,10 +12,10 @@ public class ChronoEngine : ModuleRules
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
 
-        PublicIncludePaths.AddRange(new string[] { "ControllerMenus/Public" });
+        PublicIncludePaths.AddRange(new string[] { "ChronoEngine/Public" });
 
 
-        PrivateIncludePaths.AddRange(new string[] { "ControllerMenus/Private" });
+        PrivateIncludePaths.AddRange(new string[] { "ChronoEngine/Private" });
 
         // Uncomment if you are using Slate UI
         // PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
