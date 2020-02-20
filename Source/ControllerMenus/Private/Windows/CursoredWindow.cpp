@@ -184,6 +184,14 @@ int UCursoredWindow::GetRowCount() const {
 	return FMath::Max(1, (GetElementCount() + GetColumnCount() - 1) / GetColumnCount());
 }
 
+bool UCursoredWindow::CanConfirm_Implementation() {
+	return true;
+}
+
+bool UCursoredWindow::CanCancel_Implementation() {
+	return true;
+}
+
 bool UCursoredWindow::CursorLoop_Implementation() {
 	return false;
 }
@@ -200,10 +208,14 @@ FReply UCursoredWindow::NativeOnKeyDown(const FGeometry& MyGeometry, const FKeyE
 	ProcessCursorInput(Key, bHandled);
 	ProcessScrollInput(Key, bHandled);
 	if (ValidInput(Key, WindowInputMappings.ConfirmInput)) {
-		OnConfirm.Broadcast(Index, Elements[Index]->Symbol);
+		if (CanConfirm()) {
+			OnConfirm.Broadcast(Index, Elements[Index]->Symbol);
+		}
         bHandled = true;
 	} else if (ValidInput(Key, WindowInputMappings.CancelInput)) {
-		OnCancel.Broadcast();
+		if (CanCancel()) {
+			OnCancel.Broadcast();
+		}
         bHandled = true;
 	}
 

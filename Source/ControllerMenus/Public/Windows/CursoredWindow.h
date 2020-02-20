@@ -268,6 +268,22 @@ public:
 	int GetRowCount() const;
 
 	/**
+	 * Can the user confirm on the given index?
+	 * @return if the user can confirm
+	 */
+	UFUNCTION(BlueprintPure, BlueprintNativeEvent, Category = Window)
+	bool CanConfirm();
+	virtual bool CanConfirm_Implementation();
+
+	/**
+	 * Can the user cancel on the given index?
+	 * @return if the user can cancel
+	 */
+	UFUNCTION(BlueprintPure, BlueprintNativeEvent, Category = Window)
+	bool CanCancel();
+	virtual bool CanCancel_Implementation();
+
+	/**
 	* Can the cursor loop around the edges of the window?
 	* @return if the cursor is able to loop
 	*/

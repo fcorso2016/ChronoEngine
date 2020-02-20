@@ -38,6 +38,8 @@ void USelectableOption::SelectElement() {
 void USelectableOption::ClickElement() {
 	if (Owner->GetActive()) {
 		Owner->Select(this);
-		Owner->OnConfirm.Broadcast(Owner->GetIndex(), Symbol);
+		if (Owner->CanConfirm()) {
+			Owner->OnConfirm.Broadcast(Owner->GetIndex(), Symbol);
+		}
 	}
 }
