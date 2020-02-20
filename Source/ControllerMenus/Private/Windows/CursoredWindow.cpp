@@ -185,6 +185,10 @@ int UCursoredWindow::GetRowCount() const {
 }
 
 bool UCursoredWindow::CanConfirm_Implementation() {
+	if (Index >= 0 && Index < GetElementCount()) {
+		return Elements[Index]->CanSelect();
+	}
+	
 	return true;
 }
 

@@ -33,6 +33,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Input)
 	FName Symbol;
 
+
 protected:
 	TSharedRef<SWidget> RebuildWidget() override;
 
@@ -48,5 +49,14 @@ private:
 	 */
 	UFUNCTION()
 	void ClickElement();
+
+public:
+	/**
+	 * Determines if the option is selectable by the player
+	 * @returns if the player can confirm while this option is selected
+	 */
+	UFUNCTION(BlueprintNativeEvent, BlueprintPure, Category = Input)
+	bool CanSelect();
+	virtual bool CanSelect_Implementation();
 	
 };

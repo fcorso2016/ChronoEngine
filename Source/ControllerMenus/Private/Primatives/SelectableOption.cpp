@@ -43,3 +43,7 @@ void USelectableOption::ClickElement() {
 		}
 	}
 }
+
+bool  USelectableOption::CanSelect_Implementation() {
+	return true;
+}
