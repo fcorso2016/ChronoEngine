@@ -116,6 +116,33 @@ private:
 	UPROPERTY(EditAnywhere, Category = Input)
 	FCursorActions WindowInputMappings;
 
+public:
+	/**
+	 * Plays when the player selects a valid option
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Sound Design")
+	USoundBase* ConfirmSound;
+
+	/**
+	 * Plays when the player selects an invalid option
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Sound Design")
+	USoundBase* InvalidSound;
+
+	/**
+	 * Plays when the player cancels
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Sound Design")
+	USoundBase* CancelSound;
+
+	/**
+	 * Plays when the player moves the cursor
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Sound Design")
+	USoundBase* CursorSound;
+
+
+private:
 	/**
 	 * The horizontal alignment of the elements in the window
 	 */

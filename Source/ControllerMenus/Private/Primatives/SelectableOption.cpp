@@ -31,6 +31,7 @@ TSharedRef<SWidget> USelectableOption::RebuildWidget() {
 
 void USelectableOption::SelectElement() {
 	if (Owner->GetActive()) {
+		PlaySound(Owner->CursorSound);
 		Owner->Select(this);
 	}
 }
@@ -39,7 +40,10 @@ void USelectableOption::ClickElement() {
 	if (Owner->GetActive()) {
 		Owner->Select(this);
 		if (Owner->CanConfirm()) {
+			PlaySound(Owner->ConfirmSound);
 			Owner->OnConfirm.Broadcast(Owner->GetIndex(), Symbol);
+		} else {
+			PlaySound(Owner->InvalidSound);
 		}
 	}
 }

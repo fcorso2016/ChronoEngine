@@ -213,12 +213,18 @@ FReply UCursoredWindow::NativeOnKeyDown(const FGeometry& MyGeometry, const FKeyE
 	ProcessScrollInput(Key, bHandled);
 	if (ValidInput(Key, WindowInputMappings.ConfirmInput)) {
 		if (CanConfirm()) {
+			PlaySound(ConfirmSound);
 			OnConfirm.Broadcast(Index, Elements[Index]->Symbol);
+		} else {
+			PlaySound(InvalidSound);
 		}
         bHandled = true;
 	} else if (ValidInput(Key, WindowInputMappings.CancelInput)) {
 		if (CanCancel()) {
+			PlaySound(CancelSound);
 			OnCancel.Broadcast();
+		} else {
+			PlaySound(InvalidSound);
 		}
         bHandled = true;
 	}
@@ -272,6 +278,8 @@ void UCursoredWindow::ProcessCursorInput(const FKey& Key, bool& bHandled) {
 				}
 			}
 		}
+
+		if (bHandled) PlaySound(CursorSound);
 	}
 }
 
