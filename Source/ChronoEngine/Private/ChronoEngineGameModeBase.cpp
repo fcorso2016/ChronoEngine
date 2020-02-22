@@ -3,3 +3,11 @@
 
 #include "ChronoEngineGameModeBase.h"
 
+FName AChronoEngineGameModeBase::GetDebugStartMap() const {
+	AChronoWorldSettings* WorldSettings = Cast<AChronoWorldSettings>(GetWorldSettings());
+	if (WorldSettings != nullptr) {
+		return WorldSettings->DebugStartMap;
+	}
+
+	return FName();
+}
