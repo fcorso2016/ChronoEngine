@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
+#include "PaperSprite.h"
 #include "ChronoCodeUtilities.generated.h"
 
 UENUM(BlueprintType)
@@ -47,6 +48,13 @@ public:
 	 */
 	UFUNCTION(BlueprintPure, Category = "Utilities|Arrays")
 	static int GetNullIndex();
+
+	/**
+	 * Get the size of the sprite
+	 * @return the size of the sprite
+	 */
+	UFUNCTION(BlueprintPure, Category = "Sprite")
+	static FVector2D GetSpriteSize(UPaperSprite* Sprite);
 	
 };
 

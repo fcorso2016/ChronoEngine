@@ -43,3 +43,7 @@ EControlMode UChronoCodeUtilities::GetCurrentViewMode(const APlayerController* P
 int UChronoCodeUtilities::GetNullIndex() {
 	return INDEX_NONE;
 }
+
+FVector2D UChronoCodeUtilities::GetSpriteSize(UPaperSprite* Sprite) {
+	return Sprite->GetSourceSize();
+}

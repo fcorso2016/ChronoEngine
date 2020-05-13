@@ -372,7 +372,7 @@ void UAnimatedTileMaker::CreateBattleSprites(const FString FrameDirectory, const
 
 	for (int i = 0; i < 18; i++) {
 		// Initialize the Name of the New Flipbook
-		FString FlipbookName = CharacterName + TEXT("_Battle_Sprite");
+		FString FlipbookName = CharacterName + TEXT("_BattleSprite");
 		FString DestinationName = CharacterName + TEXT("_") + Actions[i];
 		FString DestinationDirectory = FrameDirectory + TEXT("Actions/");
 

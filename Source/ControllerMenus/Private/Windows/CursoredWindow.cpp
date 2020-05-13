@@ -96,6 +96,7 @@ void UCursoredWindow::Select(USelectableOption* Option) {
 void UCursoredWindow::Deselect() {
 	Index = -1;
 	SetCursorPosition();
+	UpdateHelp();
 }
 
 bool UCursoredWindow::GetActive() const {

@@ -183,7 +183,7 @@ public:
 	/**
 	 * The help window for the game to display content based upon what the game needs it to contain
 	 */
-	UPROPERTY(BlueprintReadOnly, Category = Help)
+	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = Help)
 	UScrollWindow* HelpWindow;
 	
 	UCursoredWindow(const FObjectInitializer& ObjectInitializer);
